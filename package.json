@@ -1,0 +1,16 @@
+{
+  "name": "email-pestering-scheduler",
+  "version": "1.0.0",
+  "description": "Automated complaint emails to MTN FibreNet",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "morning": "node index.js morning",
+    "night": "node index.js night"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.9",
+    "node-cron": "^3.0.3",
+    "dotenv": "^16.4.5"
+  }
+}
