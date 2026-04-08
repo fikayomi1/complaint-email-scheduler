@@ -1,4 +1,4 @@
-name: Email Scheduling
+name: Email Scheduling Cron Job Workflow
 
 on:
   schedule:
