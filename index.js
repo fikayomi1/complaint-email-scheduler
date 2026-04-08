@@ -16,11 +16,11 @@ if (arg === 'morning' || arg === 'night') {
     console.log(`Sending to: ${RECIPIENTS.join(', ')}`);
     console.log(`Days since issue started: ${getDaysSinceIssue()}`);
 
-    cron.schedule('0 7 * * *', () => sendEmail('morning'), {
+    cron.schedule('0 8 * * *', () => sendEmail('morning'), {
         timezone: 'Africa/Lagos',
     });
 
-    cron.schedule('0 20 * * *', () => sendEmail('night'), {
+    cron.schedule('0 15 * * *', () => sendEmail('night'), {
         timezone: 'Africa/Lagos',
     });
 }
