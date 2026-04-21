@@ -1,8 +1,10 @@
-const ISSUE_START_DATE = new Date(process.env.ISSUE_START_DATE || '2025-03-20');
+const ISSUE_START_DATE = new Date(process.env.ISSUE_START_DATE || '2025-01-01');
 
 const RECIPIENTS = process.env.RECIPIENT_EMAILS
     ? process.env.RECIPIENT_EMAILS.split(',').map((e) => e.trim())
     : [];
+
+const TIMEZONE = process.env.TIMEZONE || 'UTC';
 
 function getDaysSinceIssue() {
     const now = new Date();
@@ -19,4 +21,4 @@ function formatDate(date) {
     });
 }
 
-module.exports = { ISSUE_START_DATE, RECIPIENTS, getDaysSinceIssue, formatDate };
+module.exports = { ISSUE_START_DATE, RECIPIENTS, TIMEZONE, getDaysSinceIssue, formatDate };

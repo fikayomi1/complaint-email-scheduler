@@ -1,38 +1,36 @@
 const { getDaysSinceIssue, formatDate, ISSUE_START_DATE } = require('./helper');
 
-function buildEmailBody(slot) {
+function buildEmailBody() {
     const today = formatDate(new Date());
     const days = getDaysSinceIssue();
-    const greeting = slot === 'morning' ? 'Good morning' : 'Good evening';
 
     return `
-${greeting} MTN,
+Good day,
 
-I am writing to follow up on an unresolved issue regarding my MTN FibreX service.
+I am writing to follow up on an unresolved issue with my internet service.
 
-Today is ${today}, and it has now been ${days} day${days === 1 ? '' : 's'} since I first reported this issue on ${formatDate(ISSUE_START_DATE)}.
+Today is ${today}, and it has now been ${days} day${days === 1 ? '' : 's'} since installation on ${formatDate(ISSUE_START_DATE)}.
 
-The problem is as follows:
+The situation is as follows:
 
-I subscribed to MTN FibreX, however I have been unable to use the service because it is not yet live in my location. Each time I follow up, I am told that the team is awaiting an update and that I will be communicated to — yet I have received no communication whatsoever since the issue began.
+The FATs have been powered and the lights on the router are green. At this point, all I need is for my router to be configured so I can start using the service I have paid for. Despite this, I have sent multiple emails and received absolutely no response — no reply, no follow-up.
 
-This is quite unfair. I have paid for a service I cannot use, and ${days} days later I am still without a resolution or even a meaningful update.
+This is happening over a month after the initial installation, and the entire process has been nothing short of disappointing.
 
 I am formally requesting:
-1. A clear timeline for when FibreX will go live in my area.
-2. A direct update on the status of my case.
+1. An urgent response to this email acknowledging my complaint.
+2. A technician or support agent to reach out and complete the router configuration immediately.
 
-I will continue to follow up until this matter is resolved.
+I will continue to follow up every few hours until this matter is fully resolved.
 
 Warm Regards,
-Olaoluwa
+Olaoluwa Odedunmoye
   `.trim();
 }
 
-function buildSubject(slot) {
+function buildSubject() {
     const days = getDaysSinceIssue();
-    const tag = slot === 'morning' ? '[Morning Follow-Up]' : '[Evening Follow-Up]';
-    return `${tag} Unresolved MTN FibreX Issue — ${days} Days and Counting`;
+    return `[Follow-Up] Unresolved Internet Service Configuration — ${days} Days and Counting`;
 }
 
 module.exports = { buildEmailBody, buildSubject };

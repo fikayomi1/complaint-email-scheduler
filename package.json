@@ -1,7 +1,7 @@
 {
   "name": "email-pestering-scheduler",
   "version": "1.0.0",
-  "description": "Automated complaint emails to MTN FibreNet",
+  "description": "Automated scheduled complaint emails to any service provider",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

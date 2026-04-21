@@ -1,26 +1,24 @@
 require('dotenv').config();
 const cron = require('node-cron');
 const { sendEmail } = require('./mailer');
-const { RECIPIENTS, getDaysSinceIssue } = require('./helper');
+const { RECIPIENTS, TIMEZONE, getDaysSinceIssue } = require('./helper');
+
+// Runs every 5 hours
+const CRON_SCHEDULE = process.env.CRON_SCHEDULE || '0 */5 * * *';
 
 const arg = process.argv[2];
 
-if (arg === 'morning' || arg === 'night') {
-    // Manual trigger: node index.js morning | node index.js night
-    sendEmail(arg);
+if (arg === 'send') {
+    // Manual trigger: node index.js send
+    sendEmail();
 } else {
-    // Scheduled mode: runs automatically
-    // Morning: 8:00 AM WAT (UTC+1)
-    // Night:   9:00 PM WAT (UTC+1)
-    console.log('Scheduler started. Emails will send at 8:00 AM and 9:00 PM (WAT) every day.');
+    // Scheduled mode: runs automatically every 5 hours
+    console.log(`Scheduler started. Emails will send every 5 hours (${CRON_SCHEDULE}).`);
+    console.log(`Timezone: ${TIMEZONE}`);
     console.log(`Sending to: ${RECIPIENTS.join(', ')}`);
     console.log(`Days since issue started: ${getDaysSinceIssue()}`);
 
-    cron.schedule('0 7 * * *', () => sendEmail('morning'), {
-        timezone: 'Africa/Lagos',
-    });
-
-    cron.schedule('0 20 * * *', () => sendEmail('night'), {
-        timezone: 'Africa/Lagos',
+    cron.schedule(CRON_SCHEDULE, () => sendEmail(), {
+        timezone: TIMEZONE,
     });
 }

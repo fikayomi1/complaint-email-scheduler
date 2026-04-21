@@ -12,15 +12,15 @@ function createTransporter() {
     });
 }
 
-async function sendEmail(slot) {
+async function sendEmail() {
     if (!RECIPIENTS.length) {
         console.error('No recipient emails configured in .env');
         process.exit(1);
     }
 
     const transporter = createTransporter();
-    const subject = buildSubject(slot);
-    const body = buildEmailBody(slot);
+    const subject = buildSubject();
+    const body = buildEmailBody();
 
     try {
         const info = await transporter.sendMail({
@@ -30,11 +30,11 @@ async function sendEmail(slot) {
             text: body,
         });
 
-        console.log(`[${slot.toUpperCase()}] Email sent at ${new Date().toISOString()}`);
+        console.log(`Email sent at ${new Date().toISOString()}`);
         console.log(`Recipients: ${RECIPIENTS.join(', ')}`);
         console.log(`Message ID: ${info.messageId}`);
     } catch (err) {
-        console.error(`[${slot.toUpperCase()}] Failed to send email:`, err.message);
+        console.error(`Failed to send email:`, err.message);
     }
 }
 
